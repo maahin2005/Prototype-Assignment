@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Assignment</h1>
+  </body>
+</html>
+
+<script>
+  "use strict";
+
+  function Vehical(brand, model, speed, fuleType) {
+    this.brand = brand;
+    this.model = model;
+    this.speed = speed;
+    this.fuleType = fuleType;
+  }
+
+  Vehical.prototype.accelerate = function () {
+    this.speed += 20;
+
+    console.log("Accelerate is Increased --- ", this.speed);
+  };
+  Vehical.prototype.brake = function () {
+    this.speed -= 10;
+
+    console.log("Accelerate is decreased --- ", this.speed);
+  };
+  Vehical.prototype.refule = function () {
+    console.log(this.brand, "refulling...");
+  };
+
+  function Car(brand, model, speed, fuleType, noOfWheels) {
+    Vehical.call(this, brand, model, speed, fuleType);
+
+    this.noOfWheels = noOfWheels;
+  }
+
+  function Airplane(
+    brand,
+    model,
+    speed,
+    fuleType,
+    noOfEngines,
+    hasLandingGear
+  ) {
+    Vehical.call(this, brand, model, speed, fuleType);
+
+    this.noOfEngines = noOfEngines;
+    this.hasLandingGear = hasLandingGear;
+  }
+
+  Airplane.prototype.takeOff = function () {
+    console.log("Taking Off....");
+  };
+
+  Object.setPrototypeOf(Car.prototype, Vehical.prototype);
+  Object.setPrototypeOf(Airplane.prototype, Vehical.prototype);
+
+  let c1 = new Car("Toyota", "Camry", 0, "Petrol", 4);
+
+  console.log(c1);
+  c1.accelerate();
+  c1.brake();
+  c1.refule();
+
+  let a1 = new Airplane("Boeing", "747", 0, "Jet Fuel", 4, true);
+
+  console.log(a1);
+
+  a1.takeOff();
+  a1.refule();
+</script>
